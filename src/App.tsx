@@ -21,18 +21,17 @@ class App extends React.Component {
   }
 }
 
-const callStory = () => {
-
-  // tslint:disable-next-line:typedef
-  get('story.json').then(function(response) {
-    // tslint:disable:no-console
-    console.log('Success!', response);
-    // tslint:disable:align
-    // tslint:disable-next-line:typedef
-  }, function(error) { 
-    console.error('Failed!', error); 
-  });
-
-};
+// tslint:disable:typedef
+// tslint:disable:no-console
+function callStory(): void {
+  get('story.json').then(
+    function(response) {
+      console.log('Success!', response);
+    }, 
+    function(error) { 
+      console.error('Failed!', error); 
+    }
+  );
+}
 
 export default App;
