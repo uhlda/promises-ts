@@ -16,6 +16,9 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <div id="stories">
+          stories
+        </div>
       </div>
     );
   }
@@ -24,6 +27,7 @@ class App extends React.Component {
 // tslint:disable:typedef
 // tslint:disable:no-console
 function callStory(): void {
+
   get('story.json').then(
     function(response) {
       console.log('Success!', response);
@@ -32,6 +36,7 @@ function callStory(): void {
       console.error('Failed!', error); 
     }
   );
+
 }
 
 export default App;
