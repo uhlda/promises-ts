@@ -1,8 +1,11 @@
-function get(url: string) {
+const get = (url: string): Promise<string> => {
   // Return a new promise.
   return new Promise(
-    // tslint:disable-next-line:typedef
-    function(resolve, reject) {
+
+    function(
+        resolve: (response: string) => void, 
+        reject: (error: Error) => void) 
+      {
       // Do the usual XHR stuff
       var req = new XMLHttpRequest();
       req.open('GET', url);
@@ -29,6 +32,6 @@ function get(url: string) {
       req.send();
     }
   );
-}
+};
 
 export default get;
