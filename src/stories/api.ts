@@ -4,8 +4,9 @@ const get = (url: string): Promise<string> => {
 
     function(
         resolve: (response: string) => void, 
-        reject: (error: Error) => void) 
-      {
+        reject: (error: Error) => void
+      ) {
+
       // Do the usual XHR stuff
       var req = new XMLHttpRequest();
       req.open('GET', url);
@@ -34,4 +35,23 @@ const get = (url: string): Promise<string> => {
   );
 };
 
-export default get;
+// tslint:disable:typedef
+function getJSON(url: string) {
+  return get(url).then(JSON.parse);
+}
+
+var storyDiv = document.querySelector('.story');
+
+function addHtmlToPage(content) {
+  var div = document.createElement('div');
+  div.innerHTML = content;
+  storyDiv.appendChild(div);
+}
+
+function addTextToPage(content) {
+  var p = document.createElement('p');
+  p.textContent = content;
+  storyDiv.appendChild(p);
+}
+
+export default getJSON;
