@@ -1,3 +1,5 @@
+import { Story, Chapter } from '../stories/types';
+
 const get = (url: string): Promise<string> => {
   // Return a new promise.
   return new Promise(
@@ -36,22 +38,57 @@ const get = (url: string): Promise<string> => {
 };
 
 // tslint:disable:typedef
-function getJSON(url: string) {
+export default function getJSON(url: string) {
   return get(url).then(JSON.parse);
 }
 
-var storyDiv = document.querySelector('.story');
+var storyDiv: Element;
 
-function addHtmlToPage(content) {
-  var div = document.createElement('div');
+export function addHtmlToPage(content: string) {
+  storyDiv = storyDiv || document.querySelector('.story');
+  const div = document.createElement('div');
   div.innerHTML = content;
-  storyDiv.appendChild(div);
+  if (storyDiv) {
+    storyDiv.appendChild(div);
+  }
 }
 
-function addTextToPage(content) {
-  var p = document.createElement('p');
+export function addTextToPage(content: string) {
+  storyDiv = storyDiv || document.querySelector('.story');
+  const p = document.createElement('p');
   p.textContent = content;
-  storyDiv.appendChild(p);
+  if (storyDiv) {
+    storyDiv.appendChild(p);
+  }
 }
 
-export default getJSON;
+export function getHeading() {
+  getJSON('story.json')
+  .then(function(story: Story) {
+    addHtmlToPage(story.heading);
+  });
+}
+
+var storyPromise: Promise<Story>;
+
+export function getChapter(i: number): void {
+  (storyPromise = storyPromise || getJSON('story.json'))
+  .then(function(story: Story) {
+    return getJSON(story.chapterUrls[i]);
+  })
+  .then(function(chapter: Chapter) {
+    addHtmlToPage(chapter.html);
+  });
+}
+
+export function getChapters(): void {
+  (storyPromise = storyPromise || getJSON('story.json'))
+  .then( (s) =>  
+    s.chapterUrls.map( 
+      (c) => getJSON(c)
+      .then( (chapter) =>
+        addHtmlToPage(chapter.html)
+      ) 
+    )
+  );
+}
