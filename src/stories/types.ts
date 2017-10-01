@@ -1,5 +1,9 @@
-interface Story {
+export interface Story {
+    heading: string;
     chapterUrls: string[];
 } 
 
-export default Story;
+export interface Chapter {
+    chapter: number;
+    html: string;
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import getJSON from './stories/api';
+import { getHeading, getChapter, getChapters } from './stories/api';
 import './App.css';
 
 const logo = require('./logo.svg');
@@ -9,6 +9,7 @@ class App extends React.Component {
   render() {
 
     getWrapper();
+
     return (
       <div className="App">
         <div className="App-header">
@@ -18,24 +19,32 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <div id="stories">
-          {}
+        <div className="story" id="story">
+          Story
         </div>
       </div>
     );
 
     function getWrapper(): void {
-      getJSON('story.json')
-      // tslint:disable-next-line:typedef
-      .then(function(story) {
-        return getJSON(story.chapterUrls[0]);
-      })
-      // tslint:disable-next-line:typedef
-      .then(function(chapter1) {
-        // tslint:disable:no-console
-        console.log('Got chapter 1!', chapter1);
-      });
+      getHeading();
+      getChapter(1);
+      getChapters();
     }
+
+    // function getWrapper(): void {
+    //   getJSON('story.json')
+    //   .then(function(story: Story) {
+    //     addHtmlToPage(story.heading);
+    //     return getJSON(story.chapterUrls[0]);
+    //   })
+    //   .then(function(chapter1: Chapter) {
+    //     addHtmlToPage(chapter1.html);
+    //   })
+    //   .catch(function(err: string) {
+    //     Error(err);
+    //     addTextToPage(err);
+    //   });
+    // }
   }
 }
 
