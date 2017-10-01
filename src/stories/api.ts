@@ -42,7 +42,7 @@ export default function getJSON(url: string) {
   return get(url).then(JSON.parse);
 }
 
-var storyDiv: Element;
+let storyDiv: Element;
 
 export function addHtmlToPage(content: string) {
   storyDiv = storyDiv || document.querySelector('.story');
@@ -69,7 +69,7 @@ export function getHeading() {
   });
 }
 
-var storyPromise: Promise<Story>;
+let storyPromise: Promise<Story>;
 
 export function getChapter(i: number): void {
   (storyPromise = storyPromise || getJSON('story.json'))

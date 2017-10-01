@@ -30,21 +30,6 @@ class App extends React.Component {
       getChapter(1);
       getChapters();
     }
-
-    // function getWrapper(): void {
-    //   getJSON('story.json')
-    //   .then(function(story: Story) {
-    //     addHtmlToPage(story.heading);
-    //     return getJSON(story.chapterUrls[0]);
-    //   })
-    //   .then(function(chapter1: Chapter) {
-    //     addHtmlToPage(chapter1.html);
-    //   })
-    //   .catch(function(err: string) {
-    //     Error(err);
-    //     addTextToPage(err);
-    //   });
-    // }
   }
 }
 
