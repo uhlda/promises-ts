@@ -92,3 +92,18 @@ export function getChapters(): void {
     )
   );
 }
+
+let sequence = Promise.resolve();
+
+export function getChaptersSync(): void {
+  getJSON('story.json')
+  .then(function(story) {
+    story.chapterUrls.foreach((url: string) => {
+      sequence = sequence
+        .then(() => {  
+          return(getJSON(url)); 
+        }
+      );
+    });
+  });
+}
