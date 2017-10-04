@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getHeading, getChapter, getChapters } from './stories/api';
+import { getHeading, getChapter, getChaptersSync } from './stories/api';
 import './App.css';
 
 const logo = require('./logo.svg');
@@ -28,7 +28,7 @@ class App extends React.Component {
     function getWrapper(): void {
       getHeading();
       getChapter(1);
-      getChapters();
+      getChaptersSync();
     }
   }
 }

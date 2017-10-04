@@ -102,8 +102,21 @@ export function getChaptersSync(): void {
       sequence = sequence
         .then(() => {  
           return(getJSON(url)); 
+        })
+        .then((chapter) => { 
+          addHtmlToPage(chapter.html); 
         }
       );
     });
   });
+}
+
+export function getChaptersSycReduced(): void {
+  getJSON('story.json')
+  .then(function(story) {
+    story.chapterUrls.reduce(() => {
+      
+    }, []);
+  }
+
 }
